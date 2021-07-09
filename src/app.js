@@ -1,6 +1,3 @@
-// this is an example of improting data from JSON
-// import 'orders' from '../data/orders.json';
-
 import * as orders from "../data/orders.json";
 import * as users from "../data/users.json";
 import * as companies from "../data/companies.json";
@@ -27,8 +24,29 @@ export default (function () {
     tr.appendChild(transaction);
 
     let userInfo = document.createElement("td");
-    userInfo.innerHTML = item.user_id;
-    tr.appendChild(userInfo);
+    userInfo.classList.add("user_data");
+    let userInfoLink = document.createElement("a");
+    userInfoLink.href = "#";
+
+    const user = users.find((it) => it.id === item.id);
+    if (user) {
+      let userGender = user.gender;
+      let mr = "Mr.";
+      if (userGender === "Female") {
+        mr = "Ms.";
+      }
+      const firstName = user.first_name;
+      const lastName = user.last_name;
+      const str = `${mr} ${firstName} ${lastName}`;
+      userInfoLink.innerHTML = str;
+      userInfo.appendChild(userInfoLink);
+      tr.appendChild(userInfo);
+    } else {
+      let userInfo2 = document.createElement("td");
+      userInfo.classList.add("user_data");
+      userInfo2.innerHTML = item.id;
+      tr.appendChild(userInfo2);
+    }
 
     let orderDate = document.createElement("td");
     let created_at = item.created_at;
