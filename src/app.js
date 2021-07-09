@@ -39,7 +39,7 @@ export default (function () {
     let hours = date.getHours();
     let mins = date.getMinutes();
     let secs = date.getSeconds();
-    let time = `${day}/${month}/${year}, ${hours}:${mins}:${secs}`;
+    let time = `${day}/${month + 1}/${year}, ${hours}:${mins}:${secs}`;
     orderDate.innerHTML = time;
     tr.appendChild(orderDate);
 
