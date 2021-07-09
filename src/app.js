@@ -22,18 +22,18 @@ export default (function () {
     let tr = document.createElement("tr");
     tr.setAttribute("id", `order_${item.id}`);
 
-    let td1 = document.createElement("td");
-    td1.innerHTML = item.transaction_id;
-    tr.appendChild(td1);
+    let transaction = document.createElement("td");
+    transaction.innerHTML = item.transaction_id;
+    tr.appendChild(transaction);
 
-    let td2 = document.createElement("td");
-    td2.innerHTML = item.user_id;
-    tr.appendChild(td2);
+    let userInfo = document.createElement("td");
+    userInfo.innerHTML = item.user_id;
+    tr.appendChild(userInfo);
 
     let created_at = item.created_at;
-    let date = new Date(created_at);
+    let date = new Date(+created_at);
 
-    let td3 = document.createElement("td");
+    let orderDate = document.createElement("td");
     let day = date.getDate();
     let month = date.getMonth();
     let year = date.getFullYear();
@@ -42,28 +42,26 @@ export default (function () {
     let secs = date.getSeconds();
 
     let time = `${day}/${month}/${year}, ${hours}:${mins}:${secs}`;
-    td3.innerHTML = time;
-    tr.appendChild(td3);
+    orderDate.innerHTML = time;
+    tr.appendChild(orderDate);
 
-    let td4 = document.createElement("td");
-    td4.innerHTML = item.total;
-    tr.appendChild(td4);
+    let orderAmount = document.createElement("td");
+    orderAmount.innerHTML = item.total;
+    tr.appendChild(orderAmount);
 
-    let td5 = document.createElement("td");
+    let cardNumber = document.createElement("td");
     const card_number = item.card_number;
     const codedNumber = toCodeNumber(card_number);
-    td5.innerHTML = codedNumber;
-    tr.appendChild(td5);
+    cardNumber.innerHTML = codedNumber;
+    tr.appendChild(cardNumber);
 
-    let td6 = document.createElement("td");
-    td6.innerHTML = item.card_number;
-    tr.appendChild(td6);
-    let td7 = document.createElement("td");
-    td7.innerHTML = item.card_type;
-    tr.appendChild(td7);
-    let td8 = document.createElement("td");
-    td8.innerHTML = `${item.order_country} (${item.order_ip})`;
-    tr.appendChild(td8);
+    let cardType = document.createElement("td");
+    cardType.innerHTML = item.card_type;
+    tr.appendChild(cardType);
+
+    let location = document.createElement("td");
+    location.innerHTML = `${item.order_country} (${item.order_ip})`;
+    tr.appendChild(location);
 
     return tr;
   });
