@@ -2,11 +2,11 @@ import * as orders from "../data/orders.json";
 import * as users from "../data/users.json";
 import * as companies from "../data/companies.json";
 
-function toCodeNumber(nu) {
+function toCodeNumber(num) {
   let code = "";
-  for (let i = 0; i < nu.length; i++) {
-    if (i <= 1 || i >= nu.length - 4) {
-      code += nu[i];
+  for (let i = 0; i < num.length; i++) {
+    if (i <= 1 || i >= num.length - 4) {
+      code += num[i];
     } else {
       code += "*";
     }
