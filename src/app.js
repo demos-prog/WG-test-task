@@ -18,21 +18,22 @@ function toCodeNumber(nu) {
 }
 
 export default (function () {
-
   const formatedOrders = orders.map((item) => {
     let tr = document.createElement("tr");
     tr.setAttribute("id", `order_${item.id}`);
-    let td = document.createElement("td");
 
-    td.innerHTML = item.transaction_id;
-    tr.insertCell(td);
+    let td1 = document.createElement("td");
+    td1.innerHTML = item.transaction_id;
+    tr.appendChild(td1);
 
-    td.innerHTML = item.user_id;
-    tr.insertCell(td);
-    
+    let td2 = document.createElement("td");
+    td2.innerHTML = item.user_id;
+    tr.appendChild(td2);
+
     let created_at = item.created_at;
     let date = new Date(created_at);
 
+    let td3 = document.createElement("td");
     let day = date.getDate();
     let month = date.getMonth();
     let year = date.getFullYear();
@@ -41,26 +42,33 @@ export default (function () {
     let secs = date.getSeconds();
 
     let time = `${day}/${month}/${year}, ${hours}:${mins}:${secs}`;
-    td.innerHTML = time;
-    tr.insertCell(td);
+    td3.innerHTML = time;
+    tr.appendChild(td3);
 
-    td.innerHTML = item.total;
-    tr.insertCell(td);
+    let td4 = document.createElement("td");
+    td4.innerHTML = item.total;
+    tr.appendChild(td4);
 
+    let td5 = document.createElement("td");
     const card_number = item.card_number;
     const codedNumber = toCodeNumber(card_number);
-    td.innerHTML = codedNumber;
-    tr.insertCell(td);
+    td5.innerHTML = codedNumber;
+    tr.appendChild(td5);
 
-    td.innerHTML = item.card_number;
-    tr.insertCell(td);
-    td.innerHTML = item.card_type;
-    tr.insertCell(td);
-    td.innerHTML = `${item.order_country} (${item.order_ip})`;
-    tr.insertCell(td);
+    let td6 = document.createElement("td");
+    td6.innerHTML = item.card_number;
+    tr.appendChild(td6);
+    let td7 = document.createElement("td");
+    td7.innerHTML = item.card_type;
+    tr.appendChild(td7);
+    let td8 = document.createElement("td");
+    td8.innerHTML = `${item.order_country} (${item.order_ip})`;
+    tr.appendChild(td8);
 
     return tr;
   });
 
-  document.querySelector("tbody").append(formatedOrders);
+  formatedOrders.forEach((element) => {
+    document.querySelector("tbody").append(element);
+  });
 })();
