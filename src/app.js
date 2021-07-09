@@ -30,17 +30,15 @@ export default (function () {
     userInfo.innerHTML = item.user_id;
     tr.appendChild(userInfo);
 
+    let orderDate = document.createElement("td");
     let created_at = item.created_at;
     let date = new Date(+created_at);
-
-    let orderDate = document.createElement("td");
     let day = date.getDate();
     let month = date.getMonth();
     let year = date.getFullYear();
     let hours = date.getHours();
     let mins = date.getMinutes();
     let secs = date.getSeconds();
-
     let time = `${day}/${month}/${year}, ${hours}:${mins}:${secs}`;
     orderDate.innerHTML = time;
     tr.appendChild(orderDate);
