@@ -18,7 +18,7 @@ function toCodeNumber(nu) {
 }
 
 export default (function () {
-  const formatedOrders = orders.map((item) => {
+  orders.forEach((item) => {
     let tr = document.createElement("tr");
     tr.setAttribute("id", `order_${item.id}`);
 
@@ -61,10 +61,6 @@ export default (function () {
     location.innerHTML = `${item.order_country} (${item.order_ip})`;
     tr.appendChild(location);
 
-    return tr;
-  });
-
-  formatedOrders.forEach((element) => {
-    document.querySelector("tbody").append(element);
+    document.querySelector("tbody").append(tr);
   });
 })();
