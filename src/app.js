@@ -14,6 +14,12 @@ function toCodeNumber(num) {
   return code;
 }
 
+function makeDate(num) {
+  if (num < 10) {
+    return "0" + num;
+  } else return num;
+}
+
 export default (function () {
   const table = document.createElement("table");
   let thead = document.createElement("thead");
@@ -65,8 +71,38 @@ export default (function () {
     userInfo.classList.add("user_data");
     let userInfoLink = document.createElement("a");
     userInfoLink.href = "#";
-
+    let userDetailsDiv = document.createElement("div");
+    userDetailsDiv.classList.add("hide");
+    const companyInfo = companies.find((it) => it.id === item.id);
     const user = users.find((it) => it.id === item.id);
+
+    let birthday = document.createElement("p");
+    let birthdayDate = "";
+    if (user) {
+      if (user.birthday) {
+        let bthDate = new Date(+user.birthday);
+        let bthDay = bthDate.getDate();
+        let bthMnth = bthDate.getMonth();
+        let bthYear = bthDate.getFullYear();
+        birthdayDate += `${makeDate(bthDay)}/${makeDate(bthMnth)}/${makeDate(
+          bthYear
+        )}`;
+      }
+    }
+    birthday.innerHTML = `Birthday: ${birthdayDate}`;
+    userDetailsDiv.appendChild(birthday);
+
+    let avatar = document.createElement("p");
+    let avatarImg = document.createElement("img");
+    if (user) {
+      avatarImg.setAttribute("src", `${user.avatar}`);
+      avatarImg.setAttribute("width", "100px");
+      avatar.appendChild(avatarImg);
+    } else {
+      avatar.innerHTML = "There is no avatar!";
+    }
+    userDetailsDiv.appendChild(avatar);
+
     if (user) {
       let userGender = user.gender;
       let mr = "Mr.";
@@ -78,12 +114,12 @@ export default (function () {
       const str = `${mr} ${firstName} ${lastName}`;
       userInfoLink.innerHTML = str;
       userInfo.appendChild(userInfoLink);
+      userInfo.appendChild(userDetailsDiv);
       tr.appendChild(userInfo);
     } else {
-      let userInfo2 = document.createElement("td");
-      userInfo.classList.add("user_data");
-      userInfo2.innerHTML = item.id;
-      tr.appendChild(userInfo2);
+      userInfo.innerHTML = item.id;
+      userInfo.appendChild(userDetailsDiv);
+      tr.appendChild(userInfo);
     }
 
     let orderDate = document.createElement("td");
@@ -116,6 +152,16 @@ export default (function () {
     let location = document.createElement("td");
     location.innerHTML = `${item.order_country} (${item.order_ip})`;
     tr.appendChild(location);
+
+    userInfoLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      let hides = document.querySelectorAll(".hide");
+      hides.forEach((item) => {
+        item.classList.remove("show");
+      });
+      let closestP = e.target.nextSibling;
+      closestP.classList.add("show");
+    });
 
     document.querySelector("tbody").append(tr);
   });
