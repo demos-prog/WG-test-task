@@ -72,7 +72,7 @@ export default (function () {
     let userInfoLink = document.createElement("a");
     userInfoLink.href = "#";
     let userDetailsDiv = document.createElement("div");
-    userDetailsDiv.classList.add("hide");
+    userDetailsDiv.classList.add("user-details");
     const companyInfo = companies.find((it) => it.id === item.id);
     const user = users.find((it) => it.id === item.id);
 
@@ -84,9 +84,9 @@ export default (function () {
         let bthDay = bthDate.getDate();
         let bthMnth = bthDate.getMonth();
         let bthYear = bthDate.getFullYear();
-        birthdayDate += `${makeDate(bthDay)}/${makeDate(bthMnth)}/${makeDate(
-          bthYear
-        )}`;
+        birthdayDate += `${makeDate(bthDay)}/${makeDate(
+          bthMnth + 1
+        )}/${makeDate(bthYear)}`;
       }
     }
     birthday.innerHTML = `Birthday: ${birthdayDate}`;
@@ -102,6 +102,19 @@ export default (function () {
       avatar.innerHTML = "There is no avatar!";
     }
     userDetailsDiv.appendChild(avatar);
+
+    let companyP = document.createElement("p");
+    companyP.innerHTML = "Company: ";
+    let companyLink = document.createElement("a");
+    companyLink.href = "#";
+    companyLink.innerHTML = "There is no company!";
+    if (companyInfo) {
+      companyLink.href = companyInfo.url;
+      companyLink.setAttribute("target", "_blank");
+      companyLink.innerHTML = companyInfo.title;
+    }
+    companyP.appendChild(companyLink);
+    userDetailsDiv.appendChild(companyP);
 
     if (user) {
       let userGender = user.gender;
@@ -155,7 +168,7 @@ export default (function () {
 
     userInfoLink.addEventListener("click", (e) => {
       e.preventDefault();
-      let hides = document.querySelectorAll(".hide");
+      let hides = document.querySelectorAll(".user-details");
       hides.forEach((item) => {
         item.classList.remove("show");
       });
