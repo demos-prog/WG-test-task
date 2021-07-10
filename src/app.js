@@ -59,7 +59,16 @@ export default (function () {
   table.appendChild(tbody);
   document.querySelector("#app").appendChild(table);
 
-  orders.forEach((item) => {
+  let sortedOrders = orders.slice();
+
+  userInfoHead.addEventListener("click", () => {
+    sortedOrders = orders.sort((a, b) => +a.id - +b.id);
+  });
+  orderAmountHead.addEventListener("click", () => {
+    sortedOrders = orders.sort((a, b) => +a.total - +b.total);
+  });
+
+  sortedOrders.forEach((item) => {
     let tr = document.createElement("tr");
     tr.setAttribute("id", `order_${item.id}`);
 
