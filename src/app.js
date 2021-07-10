@@ -15,6 +15,44 @@ function toCodeNumber(num) {
 }
 
 export default (function () {
+  const table = document.createElement("table");
+  let thead = document.createElement("thead");
+  let tbody = document.createElement("tbody");
+  let trh = document.createElement("tr");
+
+  let transactionHead = document.createElement("th");
+  transactionHead.innerHTML = "Transaction ID";
+  trh.appendChild(transactionHead);
+
+  let userInfoHead = document.createElement("th");
+  userInfoHead.innerHTML = "User Info";
+  trh.appendChild(userInfoHead);
+
+  let orderDateHead = document.createElement("th");
+  orderDateHead.innerHTML = "Order Date";
+  trh.appendChild(orderDateHead);
+
+  let orderAmountHead = document.createElement("th");
+  orderAmountHead.innerHTML = "Order Amount";
+  trh.appendChild(orderAmountHead);
+
+  let cardNumberHead = document.createElement("th");
+  cardNumberHead.innerHTML = "Card Number";
+  trh.appendChild(cardNumberHead);
+
+  let cardTypeHead = document.createElement("th");
+  cardTypeHead.innerHTML = "Card Type";
+  trh.appendChild(cardTypeHead);
+
+  let locationHead = document.createElement("th");
+  locationHead.innerHTML = "Location";
+  trh.appendChild(locationHead);
+
+  thead.appendChild(trh);
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  document.querySelector("#app").appendChild(table);
+
   orders.forEach((item) => {
     let tr = document.createElement("tr");
     tr.setAttribute("id", `order_${item.id}`);
