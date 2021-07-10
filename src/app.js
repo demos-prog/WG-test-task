@@ -76,10 +76,11 @@ export default (function () {
   table.appendChild(tbody);
   document.querySelector("#app").appendChild(table);
 
-  let symbol = (document.createElement("span").innerHTML = "&#8595;");
-  
+  let symbol = document.createElement("span");
+  symbol.innerHTML = "&#8595;";
+
   function addSymdol(e) {
-    e.target.innerHTML += symbol;
+    e.target.appendChild(symbol);
   }
 
   transactionHead.addEventListener("click", (e) => {
