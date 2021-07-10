@@ -20,7 +20,7 @@ function makeDate(num) {
   } else return num;
 }
 
-// эту функцию нашел в интернете 
+// эту функцию нашел в интернете !!!
 const getSort = ({ target }) => {
   const order = (target.dataset.order = -(target.dataset.order || -1));
   const index = [...target.parentNode.cells].indexOf(target);
@@ -35,6 +35,7 @@ const getSort = ({ target }) => {
   for (const cell of target.parentNode.cells)
     cell.classList.toggle("sorted", cell === target);
 };
+// ===========================
 
 export default (function () {
   const table = document.createElement("table");
@@ -75,26 +76,35 @@ export default (function () {
   table.appendChild(tbody);
   document.querySelector("#app").appendChild(table);
 
-  userInfoHead.addEventListener("click", (e) => {
-    getSort(e);
-  });
-  orderAmountHead.addEventListener("click", (e) => {
-    getSort(e);
-  });
+  let symbol = (document.createElement("span").innerHTML = "&#8595;");
+  
+  function addSymdol(e) {
+    e.target.innerHTML += symbol;
+  }
+
   transactionHead.addEventListener("click", (e) => {
     getSort(e);
+    addSymdol(e);
+  });
+  userInfoHead.addEventListener("click", (e) => {
+    getSort(e);
+    addSymdol(e);
   });
   orderDateHead.addEventListener("click", (e) => {
     getSort(e);
+    addSymdol(e);
   });
-  cardNumberHead.addEventListener("click", (e) => {
+  orderAmountHead.addEventListener("click", (e) => {
     getSort(e);
+    addSymdol(e);
   });
   cardTypeHead.addEventListener("click", (e) => {
     getSort(e);
+    addSymdol(e);
   });
   locationHead.addEventListener("click", (e) => {
     getSort(e);
+    addSymdol(e);
   });
 
   orders.forEach((item) => {
