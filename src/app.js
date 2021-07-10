@@ -20,6 +20,22 @@ function makeDate(num) {
   } else return num;
 }
 
+// эту функцию нашел в интернете 
+const getSort = ({ target }) => {
+  const order = (target.dataset.order = -(target.dataset.order || -1));
+  const index = [...target.parentNode.cells].indexOf(target);
+  const collator = new Intl.Collator(["en", "ru"], { numeric: true });
+  const comparator = (index, order) => (a, b) =>
+    order *
+    collator.compare(a.children[index].innerHTML, b.children[index].innerHTML);
+
+  for (const tBody of target.closest("table").tBodies)
+    tBody.append(...[...tBody.rows].sort(comparator(index, order)));
+
+  for (const cell of target.parentNode.cells)
+    cell.classList.toggle("sorted", cell === target);
+};
+
 export default (function () {
   const table = document.createElement("table");
   let thead = document.createElement("thead");
@@ -59,16 +75,29 @@ export default (function () {
   table.appendChild(tbody);
   document.querySelector("#app").appendChild(table);
 
-  let sortedOrders = orders.slice();
-
-  userInfoHead.addEventListener("click", () => {
-    sortedOrders = orders.sort((a, b) => +a.id - +b.id);
+  userInfoHead.addEventListener("click", (e) => {
+    getSort(e);
   });
-  orderAmountHead.addEventListener("click", () => {
-    sortedOrders = orders.sort((a, b) => +a.total - +b.total);
+  orderAmountHead.addEventListener("click", (e) => {
+    getSort(e);
+  });
+  transactionHead.addEventListener("click", (e) => {
+    getSort(e);
+  });
+  orderDateHead.addEventListener("click", (e) => {
+    getSort(e);
+  });
+  cardNumberHead.addEventListener("click", (e) => {
+    getSort(e);
+  });
+  cardTypeHead.addEventListener("click", (e) => {
+    getSort(e);
+  });
+  locationHead.addEventListener("click", (e) => {
+    getSort(e);
   });
 
-  sortedOrders.forEach((item) => {
+  orders.forEach((item) => {
     let tr = document.createElement("tr");
     tr.setAttribute("id", `order_${item.id}`);
 
