@@ -116,6 +116,13 @@ export default (function () {
     companyP.appendChild(companyLink);
     userDetailsDiv.appendChild(companyP);
 
+    let industryP = document.createElement("p");
+    industryP.innerHTML = "Industry: empty";
+    if (companyInfo) {
+      industryP.innerHTML = `Industry: ${companyInfo.industry} / ${companyInfo.sector}`;
+    }
+    userDetailsDiv.appendChild(industryP);
+
     if (user) {
       let userGender = user.gender;
       let mr = "Mr.";
