@@ -258,6 +258,7 @@ export default (function () {
   let totalCountOfStrokesNote = document.createElement("td");
   totalCountOfStrokesNote.innerHTML = "Orders Count";
   let totalCountOfStrokesValue = document.createElement("td");
+  totalCountOfStrokesValue.setAttribute("colspan", 6);
   totalCountOfStrokesValue.innerHTML = totalCountOfStrokes.length;
   totalCountOfStrokesTr.appendChild(totalCountOfStrokesNote);
   totalCountOfStrokesTr.appendChild(totalCountOfStrokesValue);
@@ -267,6 +268,7 @@ export default (function () {
   let totalOrdersValueNote = document.createElement("td");
   totalOrdersValueNote.innerHTML = "Orders Total";
   let totalOrdersValue = document.createElement("td");
+  totalOrdersValue.setAttribute("colspan", 6);
   totalOrdersValue.innerHTML = `$ ${totalAmount.toFixed(2)}`;
   totalOrdersValueTr.appendChild(totalOrdersValueNote);
   totalOrdersValueTr.appendChild(totalOrdersValue);
@@ -276,6 +278,7 @@ export default (function () {
   let medianeValueNote = document.createElement("td");
   medianeValueNote.innerHTML = "Median Value";
   let medianeValueValue = document.createElement("td");
+  medianeValueValue.setAttribute("colspan", 6);
   medianeValueValue.innerHTML = `$ ${medianValue}`;
   medianeValueTr.appendChild(medianeValueNote);
   medianeValueTr.appendChild(medianeValueValue);
@@ -285,10 +288,56 @@ export default (function () {
   let averageOrdersValueNote = document.createElement("td");
   averageOrdersValueNote.innerHTML = "Average Check";
   let averageOrdersValueValue = document.createElement("td");
+  averageOrdersValueValue.setAttribute("colspan", 6);
   averageOrdersValueValue.innerHTML = `$ ${(
     totalAmount / totalCountOfStrokes.length
   ).toFixed(2)}`;
   averageOrdersValueTr.appendChild(averageOrdersValueNote);
   averageOrdersValueTr.appendChild(averageOrdersValueValue);
   document.querySelector("table").append(averageOrdersValueTr);
+
+  // Данные по мужчинам
+  let maleCount = 0;
+  let maleSumValue = 0;
+
+  // Данные по женщинам
+  let femaleCount = 0;
+  let femaleSumValue = 0;
+
+  let usersData = document.querySelectorAll(".user_data");
+  usersData.forEach((elem) => {
+    if (elem.childNodes[0].tagName === "A") {
+      if (elem.childNodes[0].innerHTML.slice(0, 3) === "Mr.") {
+        maleSumValue += +elem.parentNode.childNodes[3].innerHTML;
+        maleCount++;
+      } else {
+        femaleSumValue += +elem.parentNode.childNodes[3].innerHTML;
+        femaleCount++;
+      }
+    }
+  });
+
+  let femaleAverageCheckTr = document.createElement("tr");
+  let femaleAverageCheckTd = document.createElement("td");
+  femaleAverageCheckTd.innerHTML = "Average Check (Female)";
+  let femaleAverageCheckValue = document.createElement("td");
+  femaleAverageCheckValue.setAttribute("colspan", 6);
+  femaleAverageCheckValue.innerHTML = `$ ${(
+    femaleSumValue / femaleCount
+  ).toFixed(2)}`;
+  femaleAverageCheckTr.appendChild(femaleAverageCheckTd);
+  femaleAverageCheckTr.appendChild(femaleAverageCheckValue);
+  document.querySelector("table").append(femaleAverageCheckTr);
+
+  let maleAverageCheckTr = document.createElement("tr");
+  let maleAverageCheckTd = document.createElement("td");
+  maleAverageCheckTd.innerHTML = "Average Check (Male)";
+  let maleAverageCheckValue = document.createElement("td");
+  maleAverageCheckValue.setAttribute("colspan", 6);
+  maleAverageCheckValue.innerHTML = `$ ${(maleSumValue / maleCount).toFixed(
+    2
+  )}`;
+  maleAverageCheckTr.appendChild(maleAverageCheckTd);
+  maleAverageCheckTr.appendChild(maleAverageCheckValue);
+  document.querySelector("table").append(maleAverageCheckTr);
 })();
