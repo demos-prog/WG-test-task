@@ -42,7 +42,18 @@ export default (function () {
   const table = document.createElement("table");
   let thead = document.createElement("thead");
   let tbody = document.createElement("tbody");
+  let searchTr = document.createElement("tr");
   let trh = document.createElement("tr");
+
+  let searchNote = document.createElement("th");
+  searchNote.innerHTML = "Search:";
+  let searchInputWrapper = document.createElement("th");
+  let searchInput = document.createElement("input");
+  searchInput.setAttribute("type", "text");
+  searchInput.setAttribute("id", "search");
+  searchInputWrapper.appendChild(searchInput);
+  searchTr.appendChild(searchNote);
+  searchTr.appendChild(searchInputWrapper);
 
   let transactionHead = document.createElement("th");
   transactionHead.innerHTML = "Transaction ID";
@@ -72,6 +83,7 @@ export default (function () {
   locationHead.innerHTML = "Location";
   trh.appendChild(locationHead);
 
+  table.append(searchTr);
   thead.appendChild(trh);
   table.appendChild(thead);
   table.appendChild(tbody);
