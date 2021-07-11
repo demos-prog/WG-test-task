@@ -83,7 +83,7 @@ export default (function () {
   locationHead.innerHTML = "Location";
   trh.appendChild(locationHead);
 
-  table.append(searchTr);
+  thead.append(searchTr);
   thead.appendChild(trh);
   table.appendChild(thead);
   table.appendChild(tbody);
