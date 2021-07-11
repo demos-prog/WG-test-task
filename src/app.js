@@ -241,9 +241,18 @@ export default (function () {
 
   // общая сумма
   let totalAmount = 0;
+
+  let medianeOrders = [];
+
   totalCountOfStrokes.forEach((elem, index) => {
     totalAmount += +totalCountOfStrokes[index].childNodes[3].innerHTML;
+    medianeOrders[index] = +totalCountOfStrokes[index].childNodes[3].innerHTML;
   });
+
+  // Медиана
+  let sortedMidianOrders = medianeOrders.sort((a, b) => a - b);
+  let medianValue =
+    sortedMidianOrders[Math.round(sortedMidianOrders.length / 2)];
 
   let totalCountOfStrokesTr = document.createElement("tr");
   let totalCountOfStrokesNote = document.createElement("td");
@@ -252,7 +261,7 @@ export default (function () {
   totalCountOfStrokesValue.innerHTML = totalCountOfStrokes.length;
   totalCountOfStrokesTr.appendChild(totalCountOfStrokesNote);
   totalCountOfStrokesTr.appendChild(totalCountOfStrokesValue);
-  document.querySelector("tbody").append(totalCountOfStrokesTr);
+  document.querySelector("table").append(totalCountOfStrokesTr);
 
   let totalOrdersValueTr = document.createElement("tr");
   let totalOrdersValueNote = document.createElement("td");
@@ -261,5 +270,14 @@ export default (function () {
   totalOrdersValue.innerHTML = `$ ${totalAmount.toFixed(2)}`;
   totalOrdersValueTr.appendChild(totalOrdersValueNote);
   totalOrdersValueTr.appendChild(totalOrdersValue);
-  document.querySelector("tbody").append(totalOrdersValueTr);
+  document.querySelector("table").append(totalOrdersValueTr);
+
+  let medianeValueTr = document.createElement("tr");
+  let medianeValueNote = document.createElement("td");
+  medianeValueNote.innerHTML = "Median Value";
+  let medianeValueValue = document.createElement("td");
+  medianeValueValue.innerHTML = `$ ${medianValue}`;
+  medianeValueTr.appendChild(medianeValueNote);
+  medianeValueTr.appendChild(medianeValueValue);
+  document.querySelector("table").append(medianeValueTr);
 })();
