@@ -43,7 +43,7 @@ export default (function () {
   let thead = document.createElement("thead");
   let tbody = document.createElement("tbody");
   let searchTr = document.createElement("tr");
-  let trh = document.createElement("tr");
+  let headTr = document.createElement("tr");
 
   let searchNote = document.createElement("th");
   searchNote.innerHTML = "Search:";
@@ -57,34 +57,34 @@ export default (function () {
 
   let transactionHead = document.createElement("th");
   transactionHead.innerHTML = "Transaction ID";
-  trh.appendChild(transactionHead);
+  headTr.appendChild(transactionHead);
 
   let userInfoHead = document.createElement("th");
   userInfoHead.innerHTML = "User Info";
-  trh.appendChild(userInfoHead);
+  headTr.appendChild(userInfoHead);
 
   let orderDateHead = document.createElement("th");
   orderDateHead.innerHTML = "Order Date";
-  trh.appendChild(orderDateHead);
+  headTr.appendChild(orderDateHead);
 
   let orderAmountHead = document.createElement("th");
   orderAmountHead.innerHTML = "Order Amount";
-  trh.appendChild(orderAmountHead);
+  headTr.appendChild(orderAmountHead);
 
   let cardNumberHead = document.createElement("th");
   cardNumberHead.innerHTML = "Card Number";
-  trh.appendChild(cardNumberHead);
+  headTr.appendChild(cardNumberHead);
 
   let cardTypeHead = document.createElement("th");
   cardTypeHead.innerHTML = "Card Type";
-  trh.appendChild(cardTypeHead);
+  headTr.appendChild(cardTypeHead);
 
   let locationHead = document.createElement("th");
   locationHead.innerHTML = "Location";
-  trh.appendChild(locationHead);
+  headTr.appendChild(locationHead);
 
   thead.append(searchTr);
-  thead.appendChild(trh);
+  thead.appendChild(headTr);
   table.appendChild(thead);
   table.appendChild(tbody);
   document.querySelector("#app").appendChild(table);
