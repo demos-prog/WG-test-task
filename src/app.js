@@ -280,4 +280,15 @@ export default (function () {
   medianeValueTr.appendChild(medianeValueNote);
   medianeValueTr.appendChild(medianeValueValue);
   document.querySelector("table").append(medianeValueTr);
+
+  let averageOrdersValueTr = document.createElement("tr");
+  let averageOrdersValueNote = document.createElement("td");
+  averageOrdersValueNote.innerHTML = "Average Check";
+  let averageOrdersValueValue = document.createElement("td");
+  averageOrdersValueValue.innerHTML = `$ ${(
+    totalAmount / totalCountOfStrokes.length
+  ).toFixed(2)}`;
+  averageOrdersValueTr.appendChild(averageOrdersValueNote);
+  averageOrdersValueTr.appendChild(averageOrdersValueValue);
+  document.querySelector("table").append(averageOrdersValueTr);
 })();
