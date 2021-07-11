@@ -241,8 +241,8 @@ export default (function () {
 
   // общая сумма
   let totalAmount = 0;
-  totalCountOfStrokes.forEach(() => {
-    totalAmount += +totalCountOfStrokes[0].childNodes[3].innerHTML;
+  totalCountOfStrokes.forEach((elem, index) => {
+    totalAmount += +totalCountOfStrokes[index].childNodes[3].innerHTML;
   });
 
   let totalCountOfStrokesTr = document.createElement("tr");
