@@ -2,6 +2,7 @@ import * as orders from "../data/orders.json";
 import * as users from "../data/users.json";
 import * as companies from "../data/companies.json";
 
+// Затирание номера карты
 function toCodeNumber(num) {
   let code = "";
   for (let i = 0; i < num.length; i++) {
@@ -20,7 +21,7 @@ function makeDate(num) {
   } else return num;
 }
 
-// эту функцию нашел в интернете !!!
+// Сортировка таблици - нашел в интернете !!!
 const getSort = ({ target }) => {
   const order = (target.dataset.order = -(target.dataset.order || -1));
   const index = [...target.parentNode.cells].indexOf(target);
@@ -234,4 +235,31 @@ export default (function () {
 
     document.querySelector("tbody").append(tr);
   });
+
+  // количество строк
+  let totalCountOfStrokes = document.querySelectorAll("tbody tr");
+
+  // общая сумма
+  let totalAmount = 0;
+  totalCountOfStrokes.forEach(() => {
+    totalAmount += +totalCountOfStrokes[0].childNodes[3].innerHTML;
+  });
+
+  let totalCountOfStrokesTr = document.createElement("tr");
+  let totalCountOfStrokesNote = document.createElement("td");
+  totalCountOfStrokesNote.innerHTML = "Orders Count";
+  let totalCountOfStrokesValue = document.createElement("td");
+  totalCountOfStrokesValue.innerHTML = totalCountOfStrokes.length;
+  totalCountOfStrokesTr.appendChild(totalCountOfStrokesNote);
+  totalCountOfStrokesTr.appendChild(totalCountOfStrokesValue);
+  document.querySelector("tbody").append(totalCountOfStrokesTr);
+
+  let totalOrdersValueTr = document.createElement("tr");
+  let totalOrdersValueNote = document.createElement("td");
+  totalOrdersValueNote.innerHTML = "Orders Total";
+  let totalOrdersValue = document.createElement("td");
+  totalOrdersValue.innerHTML = `$ ${totalAmount.toFixed(2)}`;
+  totalOrdersValueTr.appendChild(totalOrdersValueNote);
+  totalOrdersValueTr.appendChild(totalOrdersValue);
+  document.querySelector("tbody").append(totalOrdersValueTr);
 })();
