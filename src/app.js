@@ -243,10 +243,6 @@ export default (function () {
       });
       let closestP = e.target.nextSibling;
       closestP.classList.add("show");
-
-      closestP.addEventListener("click", () => {
-        closestP.classList.remove("show");
-      });
     });
 
     document.querySelector("tbody").append(tr);
