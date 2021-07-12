@@ -254,9 +254,7 @@ export default (function () {
 
   // Плиск
   searchInput.addEventListener("change", (e) => {
-    let phrase = e.target.value;
-    console.log(phrase);
-    let regPhrase = new RegExp(phrase.value, "i");
+    let regPhrase = new RegExp(e.target.value, "i");
     let flag = false;
     for (let i = 1; i < table.rows.length; i++) {
       flag = false;
@@ -265,10 +263,8 @@ export default (function () {
         if (flag) break;
       }
       if (flag) {
-        console.log("+");
         table.rows[i].style.display = "";
       } else {
-        console.log("-");
         table.rows[i].style.display = "none";
       }
     }
