@@ -252,28 +252,28 @@ export default (function () {
     document.querySelector("tbody").append(tr);
   });
 
-  const tBodyTrs = document.querySelectorAll("tbody tr");
   // Плиск
+  const tBodyRows = document.querySelectorAll("tbody tr");
   searchInput.addEventListener("change", (e) => {
     let regPhrase = new RegExp(e.target.value, "i");
     let flag = false;
-    for (let i = 0; i < tBodyTrs.length; i++) {
+    for (let i = 0; i < tBodyRows.length; i++) {
       flag = false;
 
       flag =
-        regPhrase.test(tBodyTrs[i].cells[1].innerHTML) ||
-        regPhrase.test(tBodyTrs[i].cells[3].innerHTML) ||
-        regPhrase.test(tBodyTrs[i].cells[5].innerHTML) ||
-        regPhrase.test(tBodyTrs[i].cells[6].innerHTML);
+        regPhrase.test(tBodyRows[i].cells[1].innerHTML) ||
+        regPhrase.test(tBodyRows[i].cells[3].innerHTML) ||
+        regPhrase.test(tBodyRows[i].cells[5].innerHTML) ||
+        regPhrase.test(tBodyRows[i].cells[6].innerHTML);
 
       if (flag) {
-        tBodyTrs[i].style.display = "";
+        tBodyRows[i].style.display = "";
       } else {
-        tBodyTrs[i].style.display = "none";
+        tBodyRows[i].style.display = "none";
       }
     }
   });
-
+  
   // количество строк
   let totalCountOfStrokes = document.querySelectorAll("tbody tr");
 
