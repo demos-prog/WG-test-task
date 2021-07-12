@@ -257,7 +257,7 @@ export default (function () {
   searchInput.addEventListener("change", (e) => {
     let regPhrase = new RegExp(e.target.value, "i");
     let flag = false;
-    for (let i = 1; i < tBodyTrs.length; i++) {
+    for (let i = 0; i < tBodyTrs.length; i++) {
       flag = false;
 
       flag =
