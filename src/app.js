@@ -252,6 +252,28 @@ export default (function () {
     document.querySelector("tbody").append(tr);
   });
 
+  // Плиск
+  searchInput.addEventListener("change", (e) => {
+    let phrase = e.target.value;
+    console.log(phrase);
+    let regPhrase = new RegExp(phrase.value, "i");
+    let flag = false;
+    for (let i = 1; i < table.rows.length; i++) {
+      flag = false;
+      for (let j = table.rows[i].cells.length - 1; j >= 0; j--) {
+        flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+        if (flag) break;
+      }
+      if (flag) {
+        console.log("+");
+        table.rows[i].style.display = "";
+      } else {
+        console.log("-");
+        table.rows[i].style.display = "none";
+      }
+    }
+  });
+
   // количество строк
   let totalCountOfStrokes = document.querySelectorAll("tbody tr");
 
