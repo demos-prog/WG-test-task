@@ -249,25 +249,25 @@ export default (function () {
   });
 
   // количество строк
-  let totalCountOfStrokes = document.querySelectorAll("tbody tr");
+  let totalCountOfRows = document.querySelectorAll("tbody tr");
 
   // Плиск
   searchInput.addEventListener("change", (e) => {
     let regPhrase = new RegExp(e.target.value, "i");
     let flag = false;
-    for (let i = 0; i < totalCountOfStrokes.length; i++) {
+    for (let i = 0; i < totalCountOfRows.length; i++) {
       flag = false;
 
       flag =
-        regPhrase.test(totalCountOfStrokes[i].cells[1].innerHTML) ||
-        regPhrase.test(totalCountOfStrokes[i].cells[3].innerHTML) ||
-        regPhrase.test(totalCountOfStrokes[i].cells[5].innerHTML) ||
-        regPhrase.test(totalCountOfStrokes[i].cells[6].innerHTML);
+        regPhrase.test(totalCountOfRows[i].cells[1].innerHTML) ||
+        regPhrase.test(totalCountOfRows[i].cells[3].innerHTML) ||
+        regPhrase.test(totalCountOfRows[i].cells[5].innerHTML) ||
+        regPhrase.test(totalCountOfRows[i].cells[6].innerHTML);
 
       if (flag) {
-        totalCountOfStrokes[i].style.display = "";
+        totalCountOfRows[i].style.display = "";
       } else {
-        totalCountOfStrokes[i].style.display = "none";
+        totalCountOfRows[i].style.display = "none";
       }
     }
   });
@@ -277,9 +277,9 @@ export default (function () {
 
   let medianeOrders = [];
 
-  totalCountOfStrokes.forEach((elem, index) => {
-    totalAmount += +totalCountOfStrokes[index].childNodes[3].innerHTML;
-    medianeOrders[index] = +totalCountOfStrokes[index].childNodes[3].innerHTML;
+  totalCountOfRows.forEach((elem, index) => {
+    totalAmount += +totalCountOfRows[index].childNodes[3].innerHTML;
+    medianeOrders[index] = +totalCountOfRows[index].childNodes[3].innerHTML;
   });
 
   // Медиана
@@ -292,7 +292,7 @@ export default (function () {
   totalCountOfStrokesNote.innerHTML = "Orders Count";
   let totalCountOfStrokesValue = document.createElement("td");
   totalCountOfStrokesValue.setAttribute("colspan", 6);
-  totalCountOfStrokesValue.innerHTML = totalCountOfStrokes.length;
+  totalCountOfStrokesValue.innerHTML = totalCountOfRows.length;
   totalCountOfStrokesTr.appendChild(totalCountOfStrokesNote);
   totalCountOfStrokesTr.appendChild(totalCountOfStrokesValue);
   document.querySelector("table").append(totalCountOfStrokesTr);
@@ -323,7 +323,7 @@ export default (function () {
   let averageOrdersValueValue = document.createElement("td");
   averageOrdersValueValue.setAttribute("colspan", 6);
   averageOrdersValueValue.innerHTML = `$ ${(
-    totalAmount / totalCountOfStrokes.length
+    totalAmount / totalCountOfRows.length
   ).toFixed(2)}`;
   averageOrdersValueTr.appendChild(averageOrdersValueNote);
   averageOrdersValueTr.appendChild(averageOrdersValueValue);
