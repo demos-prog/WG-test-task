@@ -252,20 +252,21 @@ export default (function () {
     document.querySelector("tbody").append(tr);
   });
 
+  const tBodyTrs = document.querySelectorAll("tbody tr");
   // Плиск
   searchInput.addEventListener("change", (e) => {
     let regPhrase = new RegExp(e.target.value, "i");
     let flag = false;
-    for (let i = 1; i < table.rows.length; i++) {
+    for (let i = 1; i < tBodyTrs.length; i++) {
       flag = false;
-      for (let j = table.rows[i].cells.length - 1; j >= 0; j--) {
-        flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+      for (let j = tBodyTrs[i].cells.length - 1; j >= 0; j--) {
+        flag = regPhrase.test(tBodyTrs[i].cells[j].innerHTML);
         if (flag) break;
       }
       if (flag) {
-        table.rows[i].style.display = "";
+        tBodyTrs[i].style.display = "";
       } else {
-        table.rows[i].style.display = "none";
+        tBodyTrs[i].style.display = "none";
       }
     }
   });
