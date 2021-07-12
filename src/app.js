@@ -252,30 +252,29 @@ export default (function () {
     document.querySelector("tbody").append(tr);
   });
 
+  // количество строк
+  let totalCountOfStrokes = document.querySelectorAll("tbody tr");
+
   // Плиск
-  const tBodyRows = document.querySelectorAll("tbody tr");
   searchInput.addEventListener("change", (e) => {
     let regPhrase = new RegExp(e.target.value, "i");
     let flag = false;
-    for (let i = 0; i < tBodyRows.length; i++) {
+    for (let i = 0; i < totalCountOfStrokes.length; i++) {
       flag = false;
 
       flag =
-        regPhrase.test(tBodyRows[i].cells[1].innerHTML) ||
-        regPhrase.test(tBodyRows[i].cells[3].innerHTML) ||
-        regPhrase.test(tBodyRows[i].cells[5].innerHTML) ||
-        regPhrase.test(tBodyRows[i].cells[6].innerHTML);
+        regPhrase.test(totalCountOfStrokes[i].cells[1].innerHTML) ||
+        regPhrase.test(totalCountOfStrokes[i].cells[3].innerHTML) ||
+        regPhrase.test(totalCountOfStrokes[i].cells[5].innerHTML) ||
+        regPhrase.test(totalCountOfStrokes[i].cells[6].innerHTML);
 
       if (flag) {
-        tBodyRows[i].style.display = "";
+        totalCountOfStrokes[i].style.display = "";
       } else {
-        tBodyRows[i].style.display = "none";
+        totalCountOfStrokes[i].style.display = "none";
       }
     }
   });
-  
-  // количество строк
-  let totalCountOfStrokes = document.querySelectorAll("tbody tr");
 
   // общая сумма
   let totalAmount = 0;
