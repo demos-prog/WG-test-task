@@ -259,10 +259,13 @@ export default (function () {
     let flag = false;
     for (let i = 1; i < tBodyTrs.length; i++) {
       flag = false;
-      for (let j = tBodyTrs[i].cells.length - 1; j >= 0; j--) {
-        flag = regPhrase.test(tBodyTrs[i].cells[j].innerHTML);
-        if (flag) break;
-      }
+
+      flag =
+        regPhrase.test(tBodyTrs[i].cells[1].innerHTML) ||
+        regPhrase.test(tBodyTrs[i].cells[3].innerHTML) ||
+        regPhrase.test(tBodyTrs[i].cells[5].innerHTML) ||
+        regPhrase.test(tBodyTrs[i].cells[6].innerHTML);
+
       if (flag) {
         tBodyTrs[i].style.display = "";
       } else {
