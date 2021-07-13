@@ -280,126 +280,141 @@ export default (function () {
       }
     });
 
-    for (let i = 0; i < 6; i++) {
-      table.removeChild(table.childNodes[2]);
+    if (table.childNodes[2]) {
+      for (let i = 0; i < 6; i++) {
+        table.removeChild(table.childNodes[2]);
+      }
     }
+
     createStat(sortedArr);
   });
 
   function createStat(arr) {
-    // общая сумма
-    let totalAmount = 0;
-
-    let medianeOrders = [];
-
-    arr.forEach((elem, index) => {
-      totalAmount += +arr[index].childNodes[3].innerHTML;
-      medianeOrders[index] = +arr[index].childNodes[3].innerHTML;
-    });
-
-    // Медиана
-    let sortedMidianOrders = medianeOrders.sort((a, b) => a - b);
-    let medianValue =
-      sortedMidianOrders[Math.round(sortedMidianOrders.length / 2)];
-
-    let totalCountOfRowsTr = document.createElement("tr");
-    let totalCountOfStrokesNote = document.createElement("td");
-    totalCountOfStrokesNote.innerHTML = "Orders Count";
-    let totalCountOfStrokesValue = document.createElement("td");
-    totalCountOfStrokesValue.setAttribute("colspan", 6);
-    totalCountOfStrokesValue.innerHTML = arr.length;
-    totalCountOfRowsTr.appendChild(totalCountOfStrokesNote);
-    totalCountOfRowsTr.appendChild(totalCountOfStrokesValue);
-    document.querySelector("table").append(totalCountOfRowsTr);
-
-    let totalOrdersValueTr = document.createElement("tr");
-    let totalOrdersValueNote = document.createElement("td");
-    totalOrdersValueNote.innerHTML = "Orders Total";
-    let totalOrdersValue = document.createElement("td");
-    totalOrdersValue.setAttribute("colspan", 6);
-    totalOrdersValue.innerHTML = `$ ${totalAmount.toFixed(2)}`;
-    totalOrdersValueTr.appendChild(totalOrdersValueNote);
-    totalOrdersValueTr.appendChild(totalOrdersValue);
-    document.querySelector("table").append(totalOrdersValueTr);
-
-    let medianeValueTr = document.createElement("tr");
-    let medianeValueNote = document.createElement("td");
-    medianeValueNote.innerHTML = "Median Value";
-    let medianeValueValue = document.createElement("td");
-    medianeValueValue.setAttribute("colspan", 6);
-    medianeValueValue.innerHTML = `$ ${medianValue}`;
-    medianeValueTr.appendChild(medianeValueNote);
-    medianeValueTr.appendChild(medianeValueValue);
-    document.querySelector("table").append(medianeValueTr);
-
-    let averageOrdersValueTr = document.createElement("tr");
-    let averageOrdersValueNote = document.createElement("td");
-    averageOrdersValueNote.innerHTML = "Average Check";
-    let averageOrdersValueValue = document.createElement("td");
-    averageOrdersValueValue.setAttribute("colspan", 6);
-    averageOrdersValueValue.innerHTML = `$ ${(totalAmount / arr.length).toFixed(
-      2
-    )}`;
-    averageOrdersValueTr.appendChild(averageOrdersValueNote);
-    averageOrdersValueTr.appendChild(averageOrdersValueValue);
-    document.querySelector("table").append(averageOrdersValueTr);
-
-    // Данные по мужчинам
-    let maleCount = 0;
-    let maleSumValue = 0;
-
-    // Данные по женщинам
-    let femaleCount = 0;
-    let femaleSumValue = 0;
-
-    let usrsData = [];
-    arr.forEach((item) => {
-      usrsData.push(item.childNodes[1]);
-    });
-
-    usrsData.forEach((elem) => {
-      if (elem.childNodes[0].tagName === "A") {
-        if (elem.childNodes[0].innerHTML.slice(0, 3) === "Mr.") {
-          maleSumValue += +elem.parentNode.childNodes[3].innerHTML;
-          maleCount++;
-        } else {
-          femaleSumValue += +elem.parentNode.childNodes[3].innerHTML;
-          femaleCount++;
-        }
+    if (arr.length === 0) {
+      // thead.removeChild(thead.childNodes[1]);
+      let newTr = document.createElement("tr");
+      let newTd = document.createElement("td");
+      newTd.innerHTML = "Nothing found";
+      newTr.appendChild(newTd);
+      thead.appendChild(newTr);
+    } else {
+      if (thead.childNodes[2]) {
+        thead.removeChild(thead.childNodes[2]);
       }
-    });
+      // общая сумма
+      let totalAmount = 0;
 
-    let femaleAverageCheckTr = document.createElement("tr");
-    let femaleAverageCheckTd = document.createElement("td");
-    femaleAverageCheckTd.innerHTML = "Average Check (Female)";
-    let femaleAverageCheckValue = document.createElement("td");
-    femaleAverageCheckValue.setAttribute("colspan", 6);
-    if (femaleSumValue) {
-      femaleAverageCheckValue.innerHTML = `$ ${(
-        femaleSumValue / femaleCount
+      let medianeOrders = [];
+
+      arr.forEach((elem, index) => {
+        totalAmount += +arr[index].childNodes[3].innerHTML;
+        medianeOrders[index] = +arr[index].childNodes[3].innerHTML;
+      });
+
+      // Медиана
+      let sortedMidianOrders = medianeOrders.sort((a, b) => a - b);
+      let medianValue =
+        sortedMidianOrders[Math.round(sortedMidianOrders.length / 2)];
+
+      let totalCountOfRowsTr = document.createElement("tr");
+      let totalCountOfStrokesNote = document.createElement("td");
+      totalCountOfStrokesNote.innerHTML = "Orders Count";
+      let totalCountOfStrokesValue = document.createElement("td");
+      totalCountOfStrokesValue.setAttribute("colspan", 6);
+      totalCountOfStrokesValue.innerHTML = arr.length;
+      totalCountOfRowsTr.appendChild(totalCountOfStrokesNote);
+      totalCountOfRowsTr.appendChild(totalCountOfStrokesValue);
+      document.querySelector("table").append(totalCountOfRowsTr);
+
+      let totalOrdersValueTr = document.createElement("tr");
+      let totalOrdersValueNote = document.createElement("td");
+      totalOrdersValueNote.innerHTML = "Orders Total";
+      let totalOrdersValue = document.createElement("td");
+      totalOrdersValue.setAttribute("colspan", 6);
+      totalOrdersValue.innerHTML = `$ ${totalAmount.toFixed(2)}`;
+      totalOrdersValueTr.appendChild(totalOrdersValueNote);
+      totalOrdersValueTr.appendChild(totalOrdersValue);
+      document.querySelector("table").append(totalOrdersValueTr);
+
+      let medianeValueTr = document.createElement("tr");
+      let medianeValueNote = document.createElement("td");
+      medianeValueNote.innerHTML = "Median Value";
+      let medianeValueValue = document.createElement("td");
+      medianeValueValue.setAttribute("colspan", 6);
+      medianeValueValue.innerHTML = `$ ${medianValue}`;
+      medianeValueTr.appendChild(medianeValueNote);
+      medianeValueTr.appendChild(medianeValueValue);
+      document.querySelector("table").append(medianeValueTr);
+
+      let averageOrdersValueTr = document.createElement("tr");
+      let averageOrdersValueNote = document.createElement("td");
+      averageOrdersValueNote.innerHTML = "Average Check";
+      let averageOrdersValueValue = document.createElement("td");
+      averageOrdersValueValue.setAttribute("colspan", 6);
+      averageOrdersValueValue.innerHTML = `$ ${(
+        totalAmount / arr.length
       ).toFixed(2)}`;
-    } else {
-      femaleAverageCheckValue.innerHTML = "There is no data !";
-    }
-    femaleAverageCheckTr.appendChild(femaleAverageCheckTd);
-    femaleAverageCheckTr.appendChild(femaleAverageCheckValue);
-    document.querySelector("table").append(femaleAverageCheckTr);
+      averageOrdersValueTr.appendChild(averageOrdersValueNote);
+      averageOrdersValueTr.appendChild(averageOrdersValueValue);
+      document.querySelector("table").append(averageOrdersValueTr);
 
-    let maleAverageCheckTr = document.createElement("tr");
-    let maleAverageCheckTd = document.createElement("td");
-    maleAverageCheckTd.innerHTML = "Average Check (Male)";
-    let maleAverageCheckValue = document.createElement("td");
-    maleAverageCheckValue.setAttribute("colspan", 6);
-    if (maleSumValue) {
-      maleAverageCheckValue.innerHTML = `$ ${(maleSumValue / maleCount).toFixed(
-        2
-      )}`;
-    } else {
-      maleAverageCheckValue.innerHTML = "There is no data !";
+      // Данные по мужчинам
+      let maleCount = 0;
+      let maleSumValue = 0;
+
+      // Данные по женщинам
+      let femaleCount = 0;
+      let femaleSumValue = 0;
+
+      let usrsData = [];
+      arr.forEach((item) => {
+        usrsData.push(item.childNodes[1]);
+      });
+
+      usrsData.forEach((elem) => {
+        if (elem.childNodes[0].tagName === "A") {
+          if (elem.childNodes[0].innerHTML.slice(0, 3) === "Mr.") {
+            maleSumValue += +elem.parentNode.childNodes[3].innerHTML;
+            maleCount++;
+          } else {
+            femaleSumValue += +elem.parentNode.childNodes[3].innerHTML;
+            femaleCount++;
+          }
+        }
+      });
+
+      let femaleAverageCheckTr = document.createElement("tr");
+      let femaleAverageCheckTd = document.createElement("td");
+      femaleAverageCheckTd.innerHTML = "Average Check (Female)";
+      let femaleAverageCheckValue = document.createElement("td");
+      femaleAverageCheckValue.setAttribute("colspan", 6);
+      if (femaleSumValue) {
+        femaleAverageCheckValue.innerHTML = `$ ${(
+          femaleSumValue / femaleCount
+        ).toFixed(2)}`;
+      } else {
+        femaleAverageCheckValue.innerHTML = "There is no data !";
+      }
+      femaleAverageCheckTr.appendChild(femaleAverageCheckTd);
+      femaleAverageCheckTr.appendChild(femaleAverageCheckValue);
+      document.querySelector("table").append(femaleAverageCheckTr);
+
+      let maleAverageCheckTr = document.createElement("tr");
+      let maleAverageCheckTd = document.createElement("td");
+      maleAverageCheckTd.innerHTML = "Average Check (Male)";
+      let maleAverageCheckValue = document.createElement("td");
+      maleAverageCheckValue.setAttribute("colspan", 6);
+      if (maleSumValue) {
+        maleAverageCheckValue.innerHTML = `$ ${(
+          maleSumValue / maleCount
+        ).toFixed(2)}`;
+      } else {
+        maleAverageCheckValue.innerHTML = "There is no data !";
+      }
+      maleAverageCheckTr.appendChild(maleAverageCheckTd);
+      maleAverageCheckTr.appendChild(maleAverageCheckValue);
+      document.querySelector("table").append(maleAverageCheckTr);
     }
-    maleAverageCheckTr.appendChild(maleAverageCheckTd);
-    maleAverageCheckTr.appendChild(maleAverageCheckValue);
-    document.querySelector("table").append(maleAverageCheckTr);
   }
 
   createStat(totalCountOfRows);
