@@ -393,7 +393,7 @@ export default (function () {
           femaleSumValue / femaleCount
         ).toFixed(2)}`;
       } else {
-        femaleAverageCheckValue.innerHTML = "There is no data !";
+        femaleAverageCheckValue.innerHTML = "n/a";
       }
       femaleAverageCheckTr.appendChild(femaleAverageCheckTd);
       femaleAverageCheckTr.appendChild(femaleAverageCheckValue);
@@ -409,7 +409,7 @@ export default (function () {
           maleSumValue / maleCount
         ).toFixed(2)}`;
       } else {
-        maleAverageCheckValue.innerHTML = "There is no data !";
+        maleAverageCheckValue.innerHTML = "n/a";
       }
       maleAverageCheckTr.appendChild(maleAverageCheckTd);
       maleAverageCheckTr.appendChild(maleAverageCheckValue);
