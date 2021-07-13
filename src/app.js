@@ -279,11 +279,11 @@ export default (function () {
         return null;
       }
     });
-    let sorted = sortedArr.slice();
+    
     for (let i = 0; i < 6; i++) {
       table.removeChild(table.childNodes[2]);
     }
-    createStat(sorted);
+    createStat(sortedArr);
   });
 
   function createStat(arr) {
