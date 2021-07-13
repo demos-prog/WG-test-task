@@ -265,9 +265,9 @@ export default (function () {
         regPhrase.test(totalCountOfRows[i].cells[6].innerHTML);
 
       if (flag) {
-        totalCountOfRows[i].style.display = "";
+        totalCountOfRows[i].classList.remove("hidden");
       } else {
-        totalCountOfRows[i].style.display = "none";
+        totalCountOfRows[i].classList.add("hidden");
       }
     }
   });
