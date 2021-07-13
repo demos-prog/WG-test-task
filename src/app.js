@@ -279,7 +279,7 @@ export default (function () {
         return null;
       }
     });
-    
+
     for (let i = 0; i < 6; i++) {
       table.removeChild(table.childNodes[2]);
     }
@@ -352,8 +352,12 @@ export default (function () {
     let femaleCount = 0;
     let femaleSumValue = 0;
 
-    let usersData = document.querySelectorAll(".user_data");
-    usersData.forEach((elem) => {
+    let usrsData = [];
+    arr.forEach((item) => {
+      usrsData.push(item.childNodes[1]);
+    });
+
+    usrsData.forEach((elem) => {
       if (elem.childNodes[0].tagName === "A") {
         if (elem.childNodes[0].innerHTML.slice(0, 3) === "Mr.") {
           maleSumValue += +elem.parentNode.childNodes[3].innerHTML;
@@ -370,9 +374,13 @@ export default (function () {
     femaleAverageCheckTd.innerHTML = "Average Check (Female)";
     let femaleAverageCheckValue = document.createElement("td");
     femaleAverageCheckValue.setAttribute("colspan", 6);
-    femaleAverageCheckValue.innerHTML = `$ ${(
-      femaleSumValue / femaleCount
-    ).toFixed(2)}`;
+    if (femaleSumValue) {
+      femaleAverageCheckValue.innerHTML = `$ ${(
+        femaleSumValue / femaleCount
+      ).toFixed(2)}`;
+    } else {
+      femaleAverageCheckValue.innerHTML = "There is no data !";
+    }
     femaleAverageCheckTr.appendChild(femaleAverageCheckTd);
     femaleAverageCheckTr.appendChild(femaleAverageCheckValue);
     document.querySelector("table").append(femaleAverageCheckTr);
@@ -382,9 +390,13 @@ export default (function () {
     maleAverageCheckTd.innerHTML = "Average Check (Male)";
     let maleAverageCheckValue = document.createElement("td");
     maleAverageCheckValue.setAttribute("colspan", 6);
-    maleAverageCheckValue.innerHTML = `$ ${(maleSumValue / maleCount).toFixed(
-      2
-    )}`;
+    if (maleSumValue) {
+      maleAverageCheckValue.innerHTML = `$ ${(maleSumValue / maleCount).toFixed(
+        2
+      )}`;
+    } else {
+      maleAverageCheckValue.innerHTML = "There is no data !";
+    }
     maleAverageCheckTr.appendChild(maleAverageCheckTd);
     maleAverageCheckTr.appendChild(maleAverageCheckValue);
     document.querySelector("table").append(maleAverageCheckTr);
