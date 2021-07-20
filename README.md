@@ -4,8 +4,10 @@
 
 Подготовка:
 
-git clone https://github.com/demos-prog/WG-test-task.git /n
-npm i /n
-npm start /n
+git clone https://github.com/demos-prog/WG-test-task.git
+
+npm i
+
+npm start
 
 //port 9000
